@@ -6,7 +6,7 @@
 #### Web Crawler
 
 - [x] Write basic crawler to get list of URLs for single domain
-- [] Feed root URLs from [Alexa Top 1000 Websites](https://www.alexa.com/topsites)
+- [ ] Feed root URLs from [Alexa Top 1000 Websites](https://www.alexa.com/topsites)
 - [ ] Convert the list of domains into a data frame/structure for analysis
 - [ ] Blacklist websites using CDNs/dynamic websites
 - [ ] Push the 'map' to a database...
