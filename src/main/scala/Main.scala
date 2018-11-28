@@ -6,9 +6,8 @@ import CrawlServer.{CrawlRequest, CrawlResponse}
 object Main extends App {
   println(s"Current Time ${System.currentTimeMillis}")
   val system = ActorSystem();
-//  val receptionist = system.actorOf(Props(new CrawlServer))1
-   val receptionist = system.actorOf(Props [CrawlServer], "CrawlServer")
-  val main = system.actorOf(Props[Main](new Main(receptionist, "http://www.northeastern.edu/", 2)), "BBCActor")
+  val receptionist = system.actorOf(Props [CrawlServer], "CrawlServer")
+  val main = system.actorOf(Props[Main](new Main(receptionist, "https://www.kayak.com/", 2)), "BBCActor")
 }
 
 class Main(receptionist: ActorRef, url: String, depth: Integer) extends Actor {
