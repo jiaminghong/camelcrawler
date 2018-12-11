@@ -3,7 +3,7 @@ import java.net.URL
 import scala.collection.mutable
 
 
-
+@deprecated
 class Domain {
   var domain:URL = _
   var inBoundDomain = mutable.HashMap[URL,Integer]()

@@ -1,7 +1,11 @@
+import java.net.URL
+
+import Database.{RootEntry, Test}
 import Getter.Done
 import LinkChecker.{CheckUrl, Result}
 import akka.actor.{Actor, ActorRef, Props, ReceiveTimeout}
 
+import scala.collection.immutable.HashSet
 import scala.concurrent.duration._
 object LinkChecker {
 
@@ -19,12 +23,24 @@ class LinkChecker(root: String, originalDepth: Integer) extends Actor {
   self ! CheckUrl(root, originalDepth)
   context.setReceiveTimeout(10 seconds)
 
+  // ActorReferences
+  val database = context.actorSelection("/user/DatabaseNode")
+
+  // Domain Storage
+  var rootDomains: HashSet[String] = HashSet()
 
   def receive = {
-    case CheckUrl(url, depth) =>
-      if (!cache(url) && depth > 0)
+    case CheckUrl(url, depth) => {
+      if(!rootDomains(new URL(url).getAuthority)) {
+        rootDomains += new URL(url).getAuthority
+        database ! RootEntry(new URL(url).getAuthority)
+        }
+
+      if (!cache(url) && depth > 0) // If URL doesn't exist in the cache, add it
         children += context.actorOf(Props[Getter](new Getter(url, depth - 1)))
+
       cache += url
+    }
 
     case Done =>
       children -= sender

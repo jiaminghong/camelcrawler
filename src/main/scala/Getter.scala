@@ -1,5 +1,6 @@
 import java.net.URL
 
+import Database.TraceEntry
 import akka.actor.{Actor, Status}
 import org.jsoup.Jsoup
 
@@ -19,12 +20,16 @@ class Getter(url: String, depth: Int) extends Actor {
 
   import Getter._
   implicit val ec = context.dispatcher
-
   val currentHost = new URL(url).getHost
+
+  val database = context.actorSelection("/user/DatabaseNode")
+  val sourceURL = url
+
   WebClient.get(url) onComplete {
     case Success(body) => self ! body
     case Failure(err) => self ! Status.Failure(err)
   }
+
 
   def getAllLinks(content: String): Iterator[String] = {
     Jsoup.parse(content, this.url).select("a[href]").iterator().asScala.map(_.absUrl("href"))
@@ -32,11 +37,16 @@ class Getter(url: String, depth: Int) extends Actor {
 
   def receive = {
     case body: String =>
+      val extensions = List("mailTo","tif","jpg","svg","#")
+
       getAllLinks(body)
         .filter(link => link != null && link.length > 0)
-        .filter(link => !link.contains("mailto"))
-        .filter(link =>  currentHost  == new URL(link).getHost)
-        .foreach(context.parent ! LinkChecker.CheckUrl(_, depth))
+        .filter(link => !extensions.exists(e => link.matches(s".*\\.$e$$")))
+        .filter(link => !link.contains("#"))
+        .foreach(link => {
+          context.parent ! LinkChecker.CheckUrl(link, depth)
+          database ! TraceEntry(sourceURL,link) // Source -> Current Link AKA OutBound Link
+        })
 
       stop
 
@@ -52,3 +62,9 @@ class Getter(url: String, depth: Int) extends Actor {
   }
 
 }
+
+/*
+ZombieCode:
+.filter(link => !link.contains("mailto"))
+//.filter(link =>  currentHost  == new URL(link).getHost)
+ */

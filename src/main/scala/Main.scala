@@ -5,7 +5,7 @@ import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 
 import scala.language.postfixOps
 import CrawlServer.{CrawlRequest, CrawlResponse}
-import Database.{Entry, RetrieveEntry, Shutdown}
+import Database._
 
 import scala.io.Source
 
@@ -15,14 +15,13 @@ object Main extends App {
 
 
   val system = ActorSystem();
-//  val receptionist = system.actorOf(Props [CrawlServer], "CrawlServer")
-//  val main = system.actorOf(Props[Main](new Main(receptionist, "https://en.wikipedia.org/wiki/Enrico_Fermi", 1)), "BBCActor")
-  val database = system.actorOf(Props [Database],"Database")
-//  database ! RetrieveEntry()
-    database ! Shutdown()
+  val receptionist = system.actorOf(Props [CrawlServer], "CrawlServer")
+  val main = system.actorOf(Props[Main](new Main(receptionist, "https://en.wikipedia.org/wiki/Enrico_Fermi", 1)), "BBCActor")
+  val database = system.actorOf(Props [Database],"DatabaseNode")
 
-  Thread.sleep(1000)
-  system.terminate() //todo graceful shutdown
+//  Thread.sleep(1000)
+//  database ! Shutdown()
+
 }
 
 

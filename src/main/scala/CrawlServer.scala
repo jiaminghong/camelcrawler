@@ -1,8 +1,13 @@
+import java.net.URL
+
 import CrawlServer.{CrawlRequest, CrawlResponse}
+import Database.Test
 import LinkChecker.Result
+import Main.system
 import akka.actor.{Actor, ActorRef, Props}
 
 import scala.collection.mutable
+import scala.collection.immutable.HashSet
 
 object CrawlServer {
   case class CrawlRequest(url: String, depth: Integer) {}
@@ -13,6 +18,10 @@ class CrawlServer extends Actor {
 
   val clients: mutable.Map[String, Set[ActorRef]] = collection.mutable.Map[String, Set[ActorRef]]()
   val controllers: mutable.Map[String, ActorRef] = mutable.Map[String, ActorRef]()
+
+
+  // ActorReferences
+  val database = context.actorSelection("/user/DatabaseNode")
 
 
   def receive = {
