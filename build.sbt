@@ -11,7 +11,6 @@ libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.5.18"
 libraryDependencies += "com.ning" % "async-http-client" % "1.7.0"
 libraryDependencies += "org.jsoup" % "jsoup" % "1.8.3"
 libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.1.3"
-
 libraryDependencies += "org.scalatest" % "scalatest_2.12" % "3.0.5" % "test"
 
 resolvers += "Java.net Maven2 Repository" at "http://download.java.net/maven/2/"
