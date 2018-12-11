@@ -6,8 +6,8 @@
 #### Web Crawler
 
 - [x] Write basic crawler to get list of URLs for single domain
-- [ ] Feed root URLs from [Alexa Top 1000 Websites](https://www.alexa.com/topsites)
-- [ ] Convert the list of domains into a data frame/structure for analysis
+- [X] Feed base root URLs from text file
+- [X] Convert the list of domains into a data frame/structure for analysis
 - [ ] Blacklist websites using CDNs/dynamic websites
 - [ ] Push the 'map' to a database...
 
@@ -32,6 +32,9 @@
 - Rotating Proxies to avoid bot check & circumnavigate CDNS e.g. cloudFare, Distill Network
 - Building **jar** file of the web crawler to work on multiple physical machines
 
+## Feature Request
+
+- Integrate Kafka
 
 ## Team Members 
 - Abdusamed

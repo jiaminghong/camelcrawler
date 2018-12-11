@@ -1,14 +1,23 @@
+import java.io.File
+import java.net.URL
+
 import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 
 import scala.language.postfixOps
 import CrawlServer.{CrawlRequest, CrawlResponse}
 
+import scala.io.Source
+
 object Main extends App {
   println(s"Current Time ${System.currentTimeMillis}")
+  Utility.readFile()
+
+
   val system = ActorSystem();
   val receptionist = system.actorOf(Props [CrawlServer], "CrawlServer")
-  val main = system.actorOf(Props[Main](new Main(receptionist, "https://www.kayak.com/", 2)), "BBCActor")
+  val main = system.actorOf(Props[Main](new Main(receptionist, "https://en.wikipedia.org/wiki/Enrico_Fermi", 1)), "BBCActor")
 }
+
 
 class Main(receptionist: ActorRef, url: String, depth: Integer) extends Actor {
   receptionist ! CrawlRequest(url, depth)
