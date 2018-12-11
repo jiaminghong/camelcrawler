@@ -7,9 +7,8 @@
 
 - [x] Write basic crawler to get list of URLs for single domain
 - [X] Feed base root URLs from text file
-- [X] Convert the list of domains into a data frame/structure for analysis
-- [ ] Blacklist websites using CDNs/dynamic websites
-- [ ] Push the 'map' to a database...
+- [ ] Convert the list of domains into a data frame/structure for analysis
+- [X] Connect crawler to a persistence database [MySQL]
 
 #### Middleware develops API for the database - Redis
 
@@ -22,6 +21,9 @@
 - [ ] Query the API to retrieve total number of backlinks
 - [ ] Make it all fancy looking...
 
+#### TestCases
+- [X] Domain Object Spec
+- [ ] JDBC Connection Spec
 
 ### How to Run It
 
@@ -34,7 +36,8 @@
 
 ## Feature Request
 
-- Integrate Kafka
+- [ ] Integrate Kafka
+- [ ] Blacklist websites using CDNs/dynamic websites
 
 ## Team Members 
 - Abdusamed
