@@ -3,11 +3,11 @@
 <ivy-report version="1.0">
 	<info
 		organisation="default"
-		module="cloudwork_akka_2.12"
+		module="cloudwork_akka$sources"
 		revision="0.1"
 		conf="provided"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool"
-		date="20181210221333"/>
+		date="20181210221401"/>
 	<dependencies>
 	</dependencies>
 </ivy-report>
