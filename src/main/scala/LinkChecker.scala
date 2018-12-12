@@ -31,14 +31,15 @@ class LinkChecker(root: String, originalDepth: Integer) extends Actor {
 
   def receive = {
     case CheckUrl(url, depth) => {
-      if(!rootDomains(new URL(url).getAuthority)) {
+      if(!rootDomains(new URL(url).getAuthority)) { // build the root domain db
         rootDomains += new URL(url).getAuthority
         database ! RootEntry(new URL(url).getAuthority)
         }
 
-      if (!cache(url) && depth > 0) // If URL doesn't exist in the cache, add it
+      if (!cache(url) && depth > 0) { // If URL doesn't exist in the cache, add it
+        print(s"Will Crawl: ${url} at depth: ${depth}\n")
         children += context.actorOf(Props[Getter](new Getter(url, depth - 1)))
-
+      }
       cache += url
     }
 

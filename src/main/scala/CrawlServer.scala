@@ -19,7 +19,6 @@ class CrawlServer extends Actor {
   val clients: mutable.Map[String, Set[ActorRef]] = collection.mutable.Map[String, Set[ActorRef]]()
   val controllers: mutable.Map[String, ActorRef] = mutable.Map[String, ActorRef]()
 
-
   // ActorReferences
   val database = context.actorSelection("/user/DatabaseNode")
 

@@ -2,6 +2,7 @@ import java.net.URL
 
 import Database.TraceEntry
 import akka.actor.{Actor, Status}
+import org.apache.commons.validator.routines.UrlValidator
 import org.jsoup.Jsoup
 
 import scala.collection.JavaConverters._
@@ -24,15 +25,18 @@ class Getter(url: String, depth: Int) extends Actor {
 
   val database = context.actorSelection("/user/DatabaseNode")
   val sourceURL = url
+  val urlValidator = new UrlValidator()
 
-  WebClient.get(url) onComplete {
+  WebClient.preGet(url) onComplete {
     case Success(body) => self ! body
     case Failure(err) => self ! Status.Failure(err)
   }
 
 
   def getAllLinks(content: String): Iterator[String] = {
+
     Jsoup.parse(content, this.url).select("a[href]").iterator().asScala.map(_.absUrl("href"))
+
   }
 
   def receive = {
@@ -43,6 +47,7 @@ class Getter(url: String, depth: Int) extends Actor {
         .filter(link => link != null && link.length > 0)
         .filter(link => !extensions.exists(e => link.matches(s".*\\.$e$$")))
         .filter(link => !link.contains("#"))
+        .filter(link => urlValidator.isValid(link))
         .foreach(link => {
           context.parent ! LinkChecker.CheckUrl(link, depth)
           database ! TraceEntry(sourceURL,link) // Source -> Current Link AKA OutBound Link

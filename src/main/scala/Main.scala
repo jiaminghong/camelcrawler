@@ -11,12 +11,15 @@ import scala.io.Source
 
 object Main extends App {
   println(s"Current Time ${System.currentTimeMillis}")
-  Utility.readFile()
+  //Utility.readFile()
+//  val rootURL = "https://en.wikipedia.org/wiki/Enrico_Fermi"
+  //val rootURL = "http://www.xinhuanet.com/"
+  val rootURL = "http://www.foat.me"
 
 
   val system = ActorSystem();
   val receptionist = system.actorOf(Props [CrawlServer], "CrawlServer")
-  val main = system.actorOf(Props[Main](new Main(receptionist, "https://en.wikipedia.org/wiki/Enrico_Fermi", 1)), "BBCActor")
+  val main = system.actorOf(Props[Main](new Main(receptionist, rootURL, 5)), "BBCActor")
   val database = system.actorOf(Props [Database],"DatabaseNode")
 
 //  Thread.sleep(1000)

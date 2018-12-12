@@ -7,15 +7,91 @@
 		revision="0.1"
 		conf="compile-internal"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool"
-		date="20181210221333"/>
+		date="20181211193331"/>
 	<dependencies>
+		<module organisation="commons-validator" name="commons-validator">
+			<revision name="1.6" status="release" pubdate="20170216101058" resolver="public" artresolver="public" homepage="http://commons.apache.org/proper/commons-validator/" downloaded="true" searched="true" default="false" conf="default, compile, runtime, default(compile), master" position="11">
+				<license name="Apache License, Version 2.0" url="https://www.apache.org/licenses/LICENSE-2.0.txt"/>
+				<metadata-artifact status="successful" details="" size="12040" time="284" location="C:\Users\abdusamed\.ivy2\cache\commons-validator\commons-validator\ivy-1.6.xml" searched="true" original-local-location="C:\Users\abdusamed\.ivy2\cache\commons-validator\commons-validator\ivy-1.6.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/commons-validator/commons-validator/1.6/commons-validator-1.6.pom"/>
+				<caller organisation="default" name="cloudwork_akka_2.12" conf="compile-internal, compile, provided, optional" rev="1.6" rev-constraint-default="1.6" rev-constraint-dynamic="1.6" callerrev="0.1"/>
+				<artifacts>
+					<artifact name="commons-validator" type="jar" ext="jar" status="successful" details="" size="186077" time="966" location="C:\Users\abdusamed\.ivy2\cache\commons-validator\commons-validator\jars\commons-validator-1.6.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/commons-validator/commons-validator/1.6/commons-validator-1.6.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="commons-collections" name="commons-collections">
+			<revision name="3.2.2" status="release" pubdate="20151112181126" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://commons.apache.org/collections/" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="14">
+				<license name="Apache License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
+				<metadata-artifact status="no" details="" size="11218" time="0" location="C:\Users\abdusamed\.ivy2\cache\commons-collections\commons-collections\ivy-3.2.2.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.pom"/>
+				<caller organisation="commons-validator" name="commons-validator" conf="default, compile, runtime, master" rev="3.2.2" rev-constraint-default="3.2.2" rev-constraint-dynamic="3.2.2" callerrev="1.6"/>
+				<caller organisation="commons-beanutils" name="commons-beanutils" conf="compile, runtime" rev="3.2.1" rev-constraint-default="3.2.1" rev-constraint-dynamic="3.2.1" callerrev="1.9.2"/>
+				<artifacts>
+					<artifact name="commons-collections" type="jar" ext="jar" status="no" details="" size="588337" time="0" location="C:\Users\abdusamed\.ivy2\cache\commons-collections\commons-collections\jars\commons-collections-3.2.2.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+			<revision name="3.2.1" evicted="latest-revision" evicted-reason="" downloaded="false" searched="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="-1">
+				<evicted-by rev="3.2.2"/>
+				<caller organisation="commons-validator" name="commons-validator" conf="default, compile, runtime, master" rev="3.2.2" rev-constraint-default="3.2.2" rev-constraint-dynamic="3.2.2" callerrev="1.6"/>
+				<caller organisation="commons-beanutils" name="commons-beanutils" conf="compile, runtime" rev="3.2.1" rev-constraint-default="3.2.1" rev-constraint-dynamic="3.2.1" callerrev="1.9.2"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="commons-logging" name="commons-logging">
+			<revision name="1.2" status="release" pubdate="20140705141228" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://commons.apache.org/proper/commons-logging/" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="13">
+				<license name="The Apache Software License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
+				<metadata-artifact status="no" details="" size="11725" time="0" location="C:\Users\abdusamed\.ivy2\cache\commons-logging\commons-logging\ivy-1.2.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/commons-logging/commons-logging/1.2/commons-logging-1.2.pom"/>
+				<caller organisation="commons-validator" name="commons-validator" conf="default, compile, runtime, master" rev="1.2" rev-constraint-default="1.2" rev-constraint-dynamic="1.2" callerrev="1.6"/>
+				<caller organisation="commons-beanutils" name="commons-beanutils" conf="compile, runtime" rev="1.1.1" rev-constraint-default="1.1.1" rev-constraint-dynamic="1.1.1" callerrev="1.9.2"/>
+				<artifacts>
+					<artifact name="commons-logging" type="jar" ext="jar" status="no" details="" size="61829" time="0" location="C:\Users\abdusamed\.ivy2\cache\commons-logging\commons-logging\jars\commons-logging-1.2.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/commons-logging/commons-logging/1.2/commons-logging-1.2.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+			<revision name="1.1.1" evicted="latest-revision" evicted-reason="" downloaded="false" searched="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="-1">
+				<evicted-by rev="1.2"/>
+				<caller organisation="commons-validator" name="commons-validator" conf="default, compile, runtime, master" rev="1.2" rev-constraint-default="1.2" rev-constraint-dynamic="1.2" callerrev="1.6"/>
+				<caller organisation="commons-beanutils" name="commons-beanutils" conf="compile, runtime" rev="1.1.1" rev-constraint-default="1.1.1" rev-constraint-dynamic="1.1.1" callerrev="1.9.2"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="commons-digester" name="commons-digester">
+			<revision name="1.8.1" status="release" pubdate="20090103114824" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://commons.apache.org/digester/" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="15">
+				<license name="The Apache Software License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
+				<metadata-artifact status="no" details="" size="5468" time="0" location="C:\Users\abdusamed\.ivy2\cache\commons-digester\commons-digester\ivy-1.8.1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/commons-digester/commons-digester/1.8.1/commons-digester-1.8.1.pom"/>
+				<caller organisation="commons-validator" name="commons-validator" conf="default, compile, runtime, master" rev="1.8.1" rev-constraint-default="1.8.1" rev-constraint-dynamic="1.8.1" callerrev="1.6"/>
+				<artifacts>
+					<artifact name="commons-digester" type="jar" ext="jar" status="no" details="" size="146108" time="0" location="C:\Users\abdusamed\.ivy2\cache\commons-digester\commons-digester\jars\commons-digester-1.8.1.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/commons-digester/commons-digester/1.8.1/commons-digester-1.8.1.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="commons-beanutils" name="commons-beanutils">
+			<revision name="1.9.2" status="release" pubdate="20140526151928" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://commons.apache.org/proper/commons-beanutils/" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="12">
+				<license name="The Apache Software License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
+				<metadata-artifact status="no" details="" size="10707" time="0" location="C:\Users\abdusamed\.ivy2\cache\commons-beanutils\commons-beanutils\ivy-1.9.2.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/commons-beanutils/commons-beanutils/1.9.2/commons-beanutils-1.9.2.pom"/>
+				<caller organisation="commons-validator" name="commons-validator" conf="default, compile, runtime, master" rev="1.9.2" rev-constraint-default="1.9.2" rev-constraint-dynamic="1.9.2" callerrev="1.6"/>
+				<artifacts>
+					<artifact name="commons-beanutils" type="jar" ext="jar" status="no" details="" size="233859" time="0" location="C:\Users\abdusamed\.ivy2\cache\commons-beanutils\commons-beanutils\jars\commons-beanutils-1.9.2.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/commons-beanutils/commons-beanutils/1.9.2/commons-beanutils-1.9.2.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
 		<module organisation="mysql" name="mysql-connector-java">
-			<revision name="5.1.24" status="release" pubdate="20150508065540" resolver="public" artresolver="public" homepage="http://dev.mysql.com/doc/connector-j/en/" downloaded="true" searched="true" default="false" conf="default, compile, runtime, default(compile), master" position="10">
+			<revision name="5.1.24" status="release" pubdate="20150508065540" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://dev.mysql.com/doc/connector-j/en/" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="10">
 				<license name="The GNU General Public License, Version 2" url="http://www.gnu.org/licenses/old-licenses/gpl-2.0.html"/>
-				<metadata-artifact status="successful" details="" size="1105" time="310" location="C:\Users\abdusamed\.ivy2\cache\mysql\mysql-connector-java\ivy-5.1.24.xml" searched="true" original-local-location="C:\Users\abdusamed\.ivy2\cache\mysql\mysql-connector-java\ivy-5.1.24.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.24/mysql-connector-java-5.1.24.pom"/>
+				<metadata-artifact status="no" details="" size="2568" time="0" location="C:\Users\abdusamed\.ivy2\cache\mysql\mysql-connector-java\ivy-5.1.24.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.24/mysql-connector-java-5.1.24.pom"/>
 				<caller organisation="default" name="cloudwork_akka_2.12" conf="compile-internal, compile, provided, optional" rev="5.1.24" rev-constraint-default="5.1.24" rev-constraint-dynamic="5.1.24" callerrev="0.1"/>
 				<artifacts>
-					<artifact name="mysql-connector-java" type="jar" ext="jar" status="successful" details="" size="846263" time="541" location="C:\Users\abdusamed\.ivy2\cache\mysql\mysql-connector-java\jars\mysql-connector-java-5.1.24.jar">
+					<artifact name="mysql-connector-java" type="jar" ext="jar" status="no" details="" size="846263" time="0" location="C:\Users\abdusamed\.ivy2\cache\mysql\mysql-connector-java\jars\mysql-connector-java-5.1.24.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.24/mysql-connector-java-5.1.24.jar"/>
 					</artifact>
 				</artifacts>
