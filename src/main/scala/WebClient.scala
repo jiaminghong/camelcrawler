@@ -2,6 +2,7 @@ import java.util.concurrent.Executors
 
 import scala.concurrent.Future
 import com.ning.http.client.{AsyncCompletionHandler, AsyncHttpClient, AsyncHttpClientConfig, Response}
+import org.slf4j.LoggerFactory
 
 import scala.None
 import scala.concurrent.Promise
@@ -9,11 +10,14 @@ import scala.concurrent.Promise
 
 object WebClient {
 
+
   val config = new AsyncHttpClientConfig.Builder()
   val client = new AsyncHttpClient(config
     .setFollowRedirects(true)
     .setExecutorService(Executors.newWorkStealingPool(64))
     .build())
+
+
 
 
   def get(url:String,promise:Promise[String]): Future[String] = {

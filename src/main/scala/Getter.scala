@@ -40,8 +40,8 @@ class Getter(url: String, depth: Int) extends Actor {
   }
 
   def receive = {
-    case body: String =>
-      val extensions = List("mailTo","tif","jpg","svg","#")
+    case body: String => {
+      val extensions = List("mailTo", "tif", "jpg", "svg", "#")
 
       getAllLinks(body)
         .filter(link => link != null && link.length > 0)
@@ -50,11 +50,11 @@ class Getter(url: String, depth: Int) extends Actor {
         .filter(link => urlValidator.isValid(link))
         .foreach(link => {
           context.parent ! LinkChecker.CheckUrl(link, depth)
-          database ! TraceEntry(sourceURL,link) // Source -> Current Link AKA OutBound Link
+          database ! TraceEntry(sourceURL, link) // Source -> Current Link AKA OutBound Link
         })
-
-      stop
-
+      stop()
+      //context.self ! Abort
+    }
     case _: Status.Failure => stop()
 
     case Abort => stop()

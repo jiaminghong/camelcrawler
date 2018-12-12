@@ -7,7 +7,7 @@ class Testfile {
 
 }
 
-
+@deprecated
 object Testfile extends App {
 
   val config = new AsyncHttpClientConfig.Builder()
@@ -17,9 +17,6 @@ object Testfile extends App {
     .build())
 
   val resultHead = client.prepareHead("http://bbc.co.uk").execute()
-
-  println(">>>>>>>>>>>>>>>>>>>>"+resultHead.get().getContentType)
-
 
 
 

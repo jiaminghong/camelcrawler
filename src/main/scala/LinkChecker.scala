@@ -37,8 +37,8 @@ class LinkChecker(root: String, originalDepth: Integer) extends Actor {
         }
 
       if (!cache(url) && depth > 0) { // If URL doesn't exist in the cache, add it
-        print(s"Will Crawl: ${url} at depth: ${depth}\n")
-        children += context.actorOf(Props[Getter](new Getter(url, depth - 1)))
+        print(s"Crawl: ${url} at depth: ${depth}\n")
+        children += context.actorOf(Props[Getter](new Getter(url, depth+1)))
       }
       cache += url
     }

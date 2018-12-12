@@ -4,7 +4,7 @@
 		module="cloudwork_akka$sources"
 		revision="0.1"
 		status="integration"
-		publication="20181211193340"
+		publication="20181212035453"
 	/>
 	<configurations>
 		<conf name="compile" visibility="public" description=""/>

@@ -7,7 +7,7 @@
 		revision="0.1"
 		conf="runtime-internal"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool"
-		date="20181211193341"/>
+		date="20181212035453"/>
 	<dependencies>
 		<module organisation="commons-validator" name="commons-validator">
 			<revision name="1.6" status="release" pubdate="20170216101058" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://commons.apache.org/proper/commons-validator/" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="12">
@@ -15,7 +15,7 @@
 				<metadata-artifact status="no" details="" size="13210" time="0" location="C:\Users\abdusamed\.ivy2\cache\commons-validator\commons-validator\ivy-1.6.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/commons-validator/commons-validator/1.6/commons-validator-1.6.pom"/>
 				<caller organisation="default" name="cloudwork_akka$sources" conf="compile, runtime-internal, runtime, optional" rev="1.6" rev-constraint-default="1.6" rev-constraint-dynamic="1.6" callerrev="0.1"/>
 				<artifacts>
-					<artifact name="commons-validator" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="234514" time="328" location="C:\Users\abdusamed\.ivy2\cache\commons-validator\commons-validator\srcs\commons-validator-1.6-sources.jar">
+					<artifact name="commons-validator" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="234514" time="0" location="C:\Users\abdusamed\.ivy2\cache\commons-validator\commons-validator\srcs\commons-validator-1.6-sources.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/commons-validator/commons-validator/1.6/commons-validator-1.6-sources.jar"/>
 					</artifact>
 				</artifacts>
