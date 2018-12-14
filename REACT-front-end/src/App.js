@@ -4,6 +4,7 @@ import axios from 'axios';
 import './App.css';
 import { DEFAULT_QUERY, DEFAULT_HPP, PATH_BASE, PATH_SEARCH, PARAM_SEARCH, PARAM_PAGE, PARAM_HPP, } from './constants/index.js';
 import { Search, Table, Button } from './Components/index.js'
+import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from 'constants';
 
 // App ES6 class component
 const updateSearchTopStoriesState = (hits, page) => (prevState) => {
@@ -50,6 +51,7 @@ class App extends Component {
     this.onSearchChange = this.onSearchChange.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
+    this.convertJson = this.convertJson.bind(this);
 
   }
 
@@ -117,6 +119,16 @@ class App extends Component {
     this.setState({ sortKey, isSortReverse });
   }
 
+  convertJson(listo){
+    var result = "["
+    var arrLength = listo.length
+    for(var i =0; i<arrLength;i++){
+      result = result + "{i:"+listo[i]+"},"
+    }
+    result = result + "]"
+    console.log(result)
+  }
+
   render() {
 
     const {
@@ -124,10 +136,21 @@ class App extends Component {
       results,
       searchKey,
       error,
-      isLoading
+      isLoading,
     } = this.state;
 
     const page = 0;
+    const urls = [
+      {
+        title: 'React',
+      },
+      {
+        title: 'Redux',
+      },
+    ];
+    const listo = ["www.google.com","www.google.com","www.google.com","www.google.com","www.google.com"];
+
+    
 
     const lists = [
       {
@@ -155,9 +178,17 @@ class App extends Component {
     ) || [];
 
     return (
+      
       <div className="page">
         <h1>Camel Crawler</h1>
         <h3>Where camels scour the web, not spiders</h3>
+        <div className="interactions">
+          <Button
+            isLoading={isLoading}
+            onClick={() => this.convertJson(listo)}>
+            JSON
+        </Button>
+        </div>
         <hr></hr>
         <div className="interactions">
           <Search
@@ -173,7 +204,7 @@ class App extends Component {
             <p>Something went wrong.</p>
           </div>
           : <Table
-            list={list}
+            list={urls}
             onDismiss={this.onDismiss}
           />
         }

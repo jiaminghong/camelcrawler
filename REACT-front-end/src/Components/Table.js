@@ -77,7 +77,7 @@ class Table extends Component {
         {list.map(item =>
           <div key={item.objectID} className="table-row">
             <span style={{ width: '60%' }}>
-              <a href={item.url}>{item.title}</a>
+              <a href={item.i}>{item.title}</a>
             </span>
             <span style={{ width: '15%' }}>
               {item.author}
