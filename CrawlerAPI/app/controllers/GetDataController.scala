@@ -125,10 +125,10 @@ class GetDataController extends Controller {
     val Ming_result = Ming_data.map(x => (model.predict(x.features), x.label))
     var spamm = ""
     if (predictionLabel.first()._1 == 0) {
-      spamm = "good"
+      spamm = "Verified URL"
     }
     else {
-      spamm = "bad"
+      spamm = "Spammy URL"
     }
     spamm
   }
