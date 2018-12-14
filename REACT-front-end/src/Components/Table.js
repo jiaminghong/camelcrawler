@@ -77,10 +77,10 @@ class Table extends Component {
         {list.map(item =>
           <div key={item.objectID} className="table-row">
             <span style={{ width: '60%' }}>
-              <a href={item.i}>{item.title}</a>
+              <a href={item.title}>{item.link}</a>
             </span>
             <span style={{ width: '15%' }}>
-              {item.author}
+              {item.spam}
             </span>
             <span style={{ width: '15%' }}>
               {item.num_comments}
@@ -90,7 +90,7 @@ class Table extends Component {
                 onClick={() => onDismiss(item.objectID)}
                 className="button-inline"
               >
-                Do More
+                Check SPAM
                 </Button>
             </span>
           </div>

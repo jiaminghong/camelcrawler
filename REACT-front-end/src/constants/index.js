@@ -1,4 +1,4 @@
-export const DEFAULT_QUERY = 'redux';
+export const DEFAULT_QUERY = 'https://www.firesticktricks.com/ipvanish-review.html';
 export const DEFAULT_HPP = '10';
 export const PATH_BASE = 'https://hn.algolia.com/api/v1';
 export const PATH_SEARCH = '/search';

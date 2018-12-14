@@ -7,26 +7,26 @@ import { Search, Table, Button } from './Components/index.js'
 import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from 'constants';
 
 // App ES6 class component
-const updateSearchTopStoriesState = (hits, page) => (prevState) => {
-  const { searchKey, results } = prevState;
+// const updateSearchTopStoriesState = (hits, page) => (prevState) => {
+//   const { searchKey, results } = prevState;
 
-  const oldHits = results && results[searchKey]
-    ? results[searchKey].hits
-    : [];
+//   const oldHits = results && results[searchKey]
+//     ? results[searchKey].hits
+//     : [];
 
-  const updatedHits = [
-    ...oldHits,
-    ...hits
-  ];
+//   const updatedHits = [
+//     ...oldHits,
+//     ...hits
+//   ];
 
-  return {
-    results: {
-      ...results,
-      [searchKey]: { hits: updatedHits, page }
-    },
-    isLoading: false
-  };
-};
+//   return {
+//     results: {
+//       ...results,
+//       [searchKey]: { hits: updatedHits, page }
+//     },
+//     isLoading: false
+//   };
+// };
 
 
 class App extends Component {
@@ -43,6 +43,10 @@ class App extends Component {
       isLoading: false,
       sortKey: 'NONE',
       isSortReverse: false,
+      urls:null,
+      tempList:[],
+      data:null,
+      links:[]   
     };
 
     this.needsToSearchTopStories = this.needsToSearchTopStories.bind(this);
@@ -60,18 +64,28 @@ class App extends Component {
   }
 
   setSearchTopStories(result) {
-    const { hits, page } = result;
-    this.setState(updateSearchTopStoriesState(hits, page));
+    
+    this.state.isLoading = false
+    this.state.tempList = [{link: "ming.fun.com"}]
+    console.log("New Results")
+    console.log(this.state.results)
+    //this.setState(updateSearchTopStoriesState(result));
   }
+  
 
+  // fetchSearchTopStories(searchTerm, page = 0) {
+  //   this.setState({ isLoading: true });
+  //   axios(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
+  //     .then(result => this.setSearchTopStories(result.data))
+  //     .catch(error => this._isMounted && this.setState({ error }));
+  // }
+  
   fetchSearchTopStories(searchTerm, page = 0) {
     this.setState({ isLoading: true });
-    axios(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
-      .then(result => this.setSearchTopStories(result.data))
+    axios(`http://localhost:9000/data/https://www.firesticktricks.com/dmca-policy`)
+      .then(result => this.setSearchTopStories(result))
       .catch(error => this._isMounted && this.setState({ error }));
   }
-
-
   // component life cycle method
   componentDidMount() {
     this._isMounted = true;
@@ -79,6 +93,12 @@ class App extends Component {
     const { searchTerm } = this.state;
     this.setState({ searchKey: searchTerm });
     this.fetchSearchTopStories(searchTerm);
+
+
+    fetch(`http://localhost:9000/data/https://www.firesticktricks.com/dmca-policy`)
+    // fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${0}&${PARAM_HPP}${DEFAULT_HPP}`)
+    .then(response => response.json())
+    .then(data => this.setState({links:data}))
   }
 
   componentWillUnmount() {
@@ -88,30 +108,42 @@ class App extends Component {
   onSearchChange(event) {
     this.setState({ searchTerm: event.target.value });
   }
-
-  onSearchSubmit(event) {
+  
+  onSearchSubmit(event){
     const { searchTerm } = this.state;
     this.setState({ searchKey: searchTerm });
-
-    if (this.needsToSearchTopStories(searchTerm)) {
-      this.fetchSearchTopStories(searchTerm);
-    }
+    console.log("calling API at: http://localhost:9000/data/" + searchTerm)
+    fetch(`http://localhost:9000/data/${searchTerm}`)
+    // fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${0}&${PARAM_HPP}${DEFAULT_HPP}`)
+    .then(response => response.json())
+    .then(data => this.setState({links:data}))
 
     event.preventDefault();
   }
+  
+
+
 
   onDismiss(id) {
     const { searchKey, results } = this.state;
-    const { hits, page } = results[searchKey];
-    const isNotId = item => item.objectID !== id;
-    const updatedHits = hits.filter(isNotId);
-    this.setState({
-      results: {
-        ...results,
-        [searchKey]: { hits: updatedHits, page }
-      }
-    });
+    // const { hits, page } = results[searchKey];
+    // const isNotId = item => item.objectID !== id;
+    // const updatedHits = hits.filter(isNotId);
+    console.log("calling API at: http://localhost:9000/datawizspam/" + this.state.searchKey)
+    fetch(`http://localhost:9000/datawizspam/${this.state.searchKey}`)
+    // fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${0}&${PARAM_HPP}${DEFAULT_HPP}`)
+    .then(response => response.json())
+    .then(data => alert(data.spam))
+
+    // this.setState({
+    //   results: {
+    //     ...results,
+    //     [searchKey]: { hits: updatedHits, page }
+    //   }
+    // });
   }
+
+
 
 
   onSort(sortKey) {
@@ -120,13 +152,7 @@ class App extends Component {
   }
 
   convertJson(listo){
-    var result = "["
-    var arrLength = listo.length
-    for(var i =0; i<arrLength;i++){
-      result = result + "{i:"+listo[i]+"},"
-    }
-    result = result + "]"
-    console.log(result)
+    console.log(this.state.results)
   }
 
   render() {
@@ -137,6 +163,8 @@ class App extends Component {
       searchKey,
       error,
       isLoading,
+      listo,
+      links,
     } = this.state;
 
     const page = 0;
@@ -148,9 +176,10 @@ class App extends Component {
         title: 'Redux',
       },
     ];
-    const listo = ["www.google.com","www.google.com","www.google.com","www.google.com","www.google.com"];
-
     
+
+    const tempList = [{link: "https://www.firesticktricks.com/ipvanish-review.html"},{link: "https://www.firesticktricks.com/how-to-use-kodi.html"},{link: "https://www.firesticktricks.com/install-sportsdevil-on-kodi.html"},{link: "https://www.firesticktricks.com/misfit-mods-lite-kodi-build.html"}]
+
 
     const lists = [
       {
@@ -172,10 +201,9 @@ class App extends Component {
     ];
 
     const list = (
-      results &&
-      results[searchKey] &&
-      results[searchKey].hits
+      lists
     ) || [];
+    
 
     return (
       
@@ -204,7 +232,7 @@ class App extends Component {
             <p>Something went wrong.</p>
           </div>
           : <Table
-            list={urls}
+            list={links}
             onDismiss={this.onDismiss}
           />
         }
@@ -235,5 +263,7 @@ export {
   Search,
   Table,
 };
+
+
 
 export default App;
