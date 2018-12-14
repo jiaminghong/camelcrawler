@@ -211,11 +211,6 @@ class App extends Component {
         <h1>Camel Crawler</h1>
         <h3>Where camels scour the web, not spiders</h3>
         <div className="interactions">
-          <Button
-            isLoading={isLoading}
-            onClick={() => this.convertJson(listo)}>
-            JSON
-        </Button>
         </div>
         <hr></hr>
         <div className="interactions">
