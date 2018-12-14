@@ -1,5 +1,7 @@
 import java.util.concurrent.Executors
 
+import Database.RetrieveEntry
+import akka.actor.{ActorSystem, Props}
 import com.ning.http.client.{AsyncCompletionHandler, AsyncHttpClient, AsyncHttpClientConfig, Response}
 
 
@@ -7,7 +9,6 @@ class Testfile {
 
 }
 
-@deprecated
 object Testfile extends App {
 
   val config = new AsyncHttpClientConfig.Builder()
@@ -37,4 +38,7 @@ object Testfile extends App {
     if (inputStream != null) inputStream.close
     content
   }
+//  val system = ActorSystem();
+//  val database = system.actorOf(Props [Database],"DatabaseNode")
+//  database ! RetrieveEntry("https://www.firesticktricks.com/")
 }

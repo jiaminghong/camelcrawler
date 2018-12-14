@@ -1,9 +1,9 @@
 import java.net.URL
 
 import CrawlServer.{CrawlRequest, CrawlResponse}
-import Database.Test
+import Database.{RetrieveEntry, Test}
 import LinkChecker.Result
-import Main.system
+import Main.{database, system}
 import akka.actor.{Actor, ActorRef, Props}
 
 import scala.collection.mutable
@@ -30,8 +30,13 @@ class CrawlServer extends Actor {
       if (controller.isEmpty) {
         controllers += (url -> context.actorOf(Props[LinkChecker](new LinkChecker(url, depth))))
         clients += (url -> Set.empty[ActorRef])
+
       }
       clients(url) += sender
+      Thread.sleep(1000)
+
+      database ! RetrieveEntry("https://www.firesticktricks.com/_outbound")
+      Thread.sleep(1000)
 
     case Result(url, links) =>
       context.stop(controllers(url))
