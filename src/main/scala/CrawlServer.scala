@@ -33,10 +33,6 @@ class CrawlServer extends Actor {
 
       }
       clients(url) += sender
-      Thread.sleep(1000)
-
-      database ! RetrieveEntry("https://www.firesticktricks.com/_outbound")
-      Thread.sleep(1000)
 
     case Result(url, links) =>
       context.stop(controllers(url))
